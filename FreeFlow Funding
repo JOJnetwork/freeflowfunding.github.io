@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  <title>Random Serial Code Generator</title>
+    <style>
+        body {
+            margin: 1;
+            padding: 10;
+            font-family: gameplay, digital7;
+            background-color: #17202A;
+            color: #fff;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2ECC71;
+            margin-bottom: -5px;
+            margin-top: 10px;
+        }
+
+        h1i {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2ECC71;
+            margin-bottom: 10px;
+            margin-top: -50px;
+        }
+
+        h1a {
+            font-size: 24px;
+            font-weight: bold;
+            color: #EAFAF1;
+            margin-bottom: 60px;
+            margin-top: -40px;
+        } 
+  
+        img {
+            margin-bottom: 5px;
+            margin-top: -20px;
+            border: none;
+            border-radius: 10px;
+        }
+  
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        button {
+            padding: 10px 10px;
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #239B56;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        } 
+  
+            iglogo {
+            margin-bottom: 5px;
+            margin-top: 90px;
+            border: shadow;
+            border-radius: 10px;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #countdown {
+            display: none;
+            font-size: 14px;
+            margin-bottom: -10px;
+          color: #239B56;
+        }
+
+        #code-display {
+            font-size: 20px;
+            width: 60%
+            background-color: black;
+            color: #2ECC71;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            margin-bottom: -20px;
+        }
+
+        #instruction {
+          display: none;
+            font-size: 10px;
+            color: grey;
+            font-weight: bold;
+          margin-bottom: -10px
+        }
+
+        #live-time {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #239B56;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+        }
+
+        @media screen and (max-width: 1024px) {
+            /* Mobile and tablet view styles */
+            #container {
+                height: 100%;
+                padding: auto;
+            }
+
+            h1 {
+                font-size: 150px;
+                text-align: center;
+            }
+
+            h1i {
+                font-size: 150px;
+                text-align: center;
+            }
+
+            h1a {
+                font-size: 40px;
+                text-align: center;
+                letter-spacing: 10px             
+            } 
+          
+            img {
+              width: 80%;
+            }
+              
+            h2 {
+                font-size: 25px;
+                text-align: center;
+            }
+
+            button {
+                width: 80%;
+            } 
+          
+            iglogo {
+              width: 15%
+            }
+          
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>free</h1>
+        <h1i>flow</h1i>
+        <h1a>FUNDI₦G</h1a>
+        <img><img src="https://www.mediafire.com/convkey/3872/as65vohyb9ariuu4g.jpg"><img>
+        <h2>TICKET FOR THE DAY &#127915;</h2>
+        <button id="generate-btn">tap to get your serial number</button>
+        <p id="countdown">Generating code in 30 s...</p>
+        <div id="code-display"></div>
+        <p id="instruction"></p>      
+    </div>
+  
+    <div id="live-time"></div>
+        
+    <script>
+        var generateBtn = document.getElementById('generate-btn');
+        var countdown = document.getElementById('countdown');
+        var codeDisplay = document.getElementById('code-display');
+        var instruction = document.getElementById('instruction');
+        var remainingAttempts = 3;
+
+        generateBtn.addEventListener('click', function() {
+            if (remainingAttempts > 0) {
+              generateBtn.disabled = true;
+                countdown.style.display = 'block';
+
+                // Start countdown
+                var timeLeft = 29;
+                var countdownInterval = setInterval(function() {
+                    countdown.textContent = 'Generating code in ' + timeLeft + ' s...';
+                    timeLeft--;
+
+                    if (timeLeft < 0) {
+                        clearInterval(countdownInterval);
+                        countdown.style.display = 'none';
+
+                        // Generate random code
+                        var code = generateCode();
+                        codeDisplay.textContent = code;
+                        codeDisplay.style.display = 'block';
+                        instruction.style.display = 'block';
+                        
+                        remainingAttempts--;
+                    }
+                }, 1000);
+            }
+        });
+
+        function generateCode() {
+            var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var numbers = '0123456789';
+            var code = '';
+
+            // Generate 2 unique letters
+            for (var i = 0; i < 2; i++) {
+                var randomIndex = Math.floor(Math.random() * letters.length);
+                var letter = letters.charAt(randomIndex);
+                code += letter;
+            }
+
+            // Generate 6 unique numbers
+            for (var j = 0; j < 6; j++) {
+                var randomIndex = Math.floor(Math.random() * numbers.length);
+                var number = numbers.charAt(randomIndex);
+                code += number;
+            }
+
+            return code;
+        }
+  
+        // Function to update the live time and date
+        function updateLiveTime() {
+            var liveTimeElement = document.getElementById("live-time");
+            var now = new Date();
+            var timeString = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+            var dateString = now.toLocaleDateString();
+            liveTimeElement.textContent = timeString + " | " + dateString;
+        }
+
+        // Update the live time immediately
+        updateLiveTime();
+
+        // Update the live time every second
+        setInterval(updateLiveTime, 1000);
+    </script>
+    </script>
+    <footer>
+    <p>&copy; 2023 freeflow funding. All rights reserved.</p>
+    </footer>
+</body>
+  <style>
+  footer {
+    padding: 20px;
+    text-align: center;
+  }
+
+  footer p {
+    margin: 20;
+    font-size: 14px;
+    color: white;
+  }
+</style>
+  </html>
